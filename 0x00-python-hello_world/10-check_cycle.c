@@ -12,7 +12,7 @@ int check_cycle(listint_t *list)
   current = list;
   power = list;
 
-  while (current != NULL && power != NULL)
+  while (current != NULL && power != NULL && power->next)
   {
     current = current->next;
     power = power->next->next;
