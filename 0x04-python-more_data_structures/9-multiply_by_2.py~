@@ -1,6 +1,0 @@
-#!/usr/bin/python3
-def multiply_by_2(a_dictionary):
-    new_d = {}
-    for i in a_directory:
-        new_d[i] = a_directory[i] * 2
-    return new_d
