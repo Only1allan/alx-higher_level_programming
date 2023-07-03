@@ -20,6 +20,8 @@ class Rectangle:
     def __init__(self, width=0, height=0):
         """Intializes a height and width instance"""
 
+        self.__width = 0
+        self.__height = 0
         self.width = width
         self.height = height
 
