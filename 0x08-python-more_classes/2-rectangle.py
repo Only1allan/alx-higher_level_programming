@@ -19,7 +19,7 @@ class Rectangle:
     """
     def __init__(self, width=0, height=0):
         """Intializes a height and width instance"""
-    
+
         self.width = width
         self.height = height
 
