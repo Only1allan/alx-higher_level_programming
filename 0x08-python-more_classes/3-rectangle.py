@@ -76,5 +76,4 @@ class Rectangle:
         str = ""
         for i in range(self.__height):
             str += "#" * self.__width + "\n"
-        
         return str
