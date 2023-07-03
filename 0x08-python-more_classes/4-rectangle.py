@@ -84,4 +84,4 @@ class Rectangle:
         Returns:
         string rep of a rectangle
         """
-        return f"Rectangle({self.__width}, {self.__height})"
+        return "Rectangle({}, {})".format(self.__width, self.__height)
