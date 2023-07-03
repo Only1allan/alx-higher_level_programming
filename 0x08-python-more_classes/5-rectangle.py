@@ -73,8 +73,22 @@ class Rectangle:
         """
         if self.__width == 0 or self.__height == 0:
             return ""
+
         str = ""
         for i in range(self.__height):
             str += "#" * self.__width + "\n"
-        
         return str
+
+    def __repr__(self):
+        """
+        Returns:
+        string rep of a rectangle
+        """
+        return "Rectangle({}, {})".format(self.__width, self.__height)
+
+    def __del__(self):
+        """
+        Returns:
+        Prints message when rectangle is deleted
+        """
+        print("Bye rectangle...")
