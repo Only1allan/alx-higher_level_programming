@@ -21,14 +21,18 @@ class Rectangle:
     print_symbol = "#"
 
     def __init__(self, width=0, height=0):
-        """Intializes a height and width instance"""
-
+        """Intializes a height and width instance
+        Args:
+        width (int): width of rectangle
+        height (int): height of rectangle
+        """
         self.width = width
         self.height = height
         type(self).number_of_instances += 1
 
     @property
     def width(self):
+        """get width of rectangle"""
         return self.__width
 
     @width.setter
@@ -42,6 +46,7 @@ class Rectangle:
 
     @property
     def height(self):
+        """get height of rectangle"""
         return self.__height
 
     @height.setter
@@ -80,15 +85,19 @@ class Rectangle:
 
         output = ""
         for i in range(self.__height):
-            output += str(self.print_symbol) * self.__width + "\n"
-        return output
+            [output.append(str(self.print_symbol))for j in range(self.__width)]
+        if i != self.__height - 1:
+            output.append("\n")
+        return ("".join(output))
 
     def __repr__(self):
         """
         Returns:
         string rep of a rectangle
         """
-        return "Rectangle({}, {})".format(self.__width, self.__height)
+        new = "Rectangle(" + str(self.__width)
+        new += ", " + str(self.__height) + ")"
+        return new
 
     def __del__(self):
         """
