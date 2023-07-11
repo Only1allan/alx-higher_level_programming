@@ -3,6 +3,9 @@
 import sys
 import signal
 
+file_size = 0
+statcodecount = {}
+
 
 def interrupt_handler(signal, frame):
     """interrupt handler to exit gracefully on ctrl-c or kill command."""
@@ -12,7 +15,7 @@ def interrupt_handler(signal, frame):
 
 def print_stats():
     """prints accumulates metrics"""
-    print("File size: ", file_size)
+    print("Total file size: ", file_size)
     for status in sorted(statcodecount.keys()):
         count = statcodecount[status]
         print(f"{status}: {count}")
@@ -22,9 +25,6 @@ signal.signal(signal.SIGINT, interrupt_handler)
 
 try:
     line_count = 0
-    file_size = 0
-    statcodecount = {}
-
     for line in sys.stdin:
         line = line.strip()
 
@@ -38,7 +38,6 @@ try:
         line_count += 1
         if line_count % 10 == 0:
             print_stats()
-            file_size = 0
-            statcodecount.clear()
 except KeyboardInterrupt:
     print_stats()
+    sys.exit(0)
