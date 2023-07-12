@@ -5,7 +5,7 @@
 class Myint(int):
     """My integer subclass is a rebel"""
     def __eq__(self, value):
-        return self.real != value
+        return int(str(self)) != value
 
     def __ne__(self, value):
-        return self.real == value
+        return int(str(self)) == value
