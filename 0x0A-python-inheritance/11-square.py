@@ -16,4 +16,4 @@ class Square(BaseGeometry):
 
     def area(self):
         """returns the areas of squares"""
-        return super().area()
+        return self.__size ** 2

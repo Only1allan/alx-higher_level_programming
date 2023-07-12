@@ -3,9 +3,9 @@
 
 
 class Myint(int):
-    """My integer subclass"""
-    def __eq__(self, other):
-        return self.real != other
+    """My integer subclass is a rebel"""
+    def __eq__(self, value):
+        return self.real != value
 
     def __ne__(self, value):
-        return self.real == other
+        return self.real == value
