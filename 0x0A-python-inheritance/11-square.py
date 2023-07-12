@@ -12,7 +12,7 @@ class Square(BaseGeometry):
 
     def __str__(self):
         """print string representation of a square"""
-        return "[Square]" + str(self.__size) + '/' + str(self.__size)
+        return '[Square] ' + str(self.__size) + '/' + str(self.__size)
 
     def area(self):
         """returns the areas of squares"""

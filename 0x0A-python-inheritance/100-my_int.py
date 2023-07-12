@@ -8,4 +8,4 @@ class Myint(int):
         return self.real != other
 
     def __ne__(self, value):
-        return int(str(self)) == value
+        return self.real == other
