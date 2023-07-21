@@ -21,7 +21,7 @@ class Rectangle(Base):
     def width(self, value):
         if type(value) != int:
             raise TypeError("width must be an integer")
-        if value < 0:
+        if value <= 0:
             raise ValueError("width must be > 0")
         self.__width = value
 
@@ -34,7 +34,7 @@ class Rectangle(Base):
     def height(self, value):
         if type(value) != int:
             raise TypeError("height must be an integer")
-        if value < 0:
+        if value <= 0:
             raise ValueError("height must be > 0")
         self.__height = value
 
@@ -70,19 +70,10 @@ class Rectangle(Base):
 
     def display(self):
         """function that prints the the rectangle instance with #"""
-        if self.width == 0 or self.height == 0:
-            print()
         for i in range(self.y):
             print()
-        for i in range(self.height):
-            for j in range(self.x):
-                print(" ", end="")
-            for j in range(self.width):
-                if i == self.height - 1 and j == self.width - 1:
-                    print("#")
-                else:
-                    print("#", end="")
-            print()
+        for j in range(self.height):
+            print(" " * self.x + "#" * self.width)
 
     def __str__(self):
         """functon that returns str rep of the rectangle"""

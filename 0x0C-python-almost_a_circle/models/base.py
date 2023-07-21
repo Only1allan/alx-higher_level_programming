@@ -19,25 +19,25 @@ class Base:
     @staticmethod
     def to__json_string(list_dictionaries):
         """returns JSON string representation"""
-        if list_dictionaries is None or list_dictionaries == []:
+        if list_dictionaries is None or not list_dictionaries:
             return "[]"
         return json.dumps(list_dictionaries)
 
     @classmethod
     def save_to_file(cls, list_objs):
         """write JSON serilization to a file"""
+        if list_objs is None:
+            list_objs = []
         filename = cls.__name__ + ".json"
-        with open(filename, "w") as jsonfile:
-            if list_objs is None:
-                jsonfile.write("[]")
-            else:
-                list_dic = [i.to_dictionary() for i in list_objs]
-                jsonfile.write(Base.to__json_string(list_dic))
+        objects = [obj.to_dictionary() for obj in list_objs]
+        json_str = cls.to_json_string(objects)
+        with open(filename, "w", encoding='uft-8') as file:
+            file.write(json_str)
 
     @staticmethod
     def from__json_string(json_string):
         """return the deserialization of a JSON string"""
-        if json_string is None or json_string == "[]":
+        if json_string is None or not json_string:
             return []
         return json.loads(json_string)
 
@@ -55,12 +55,11 @@ class Base:
     @classmethod
     def load_from_file(cls):
         """returns a list of classes instatiated from a file JSON"""
-        filename = str(cls.__name__) + "json"
         try:
             with open(filename, "r") as jsonfile:
-                list_dic = Base.from__json_string(jsonfile.read())
+                list_dic = cls.from_json_string(jsonfile.read())
                 return [cls.create(**i) for i in list_dic]
-        except IOError:
+        except FileNotFoundError:
             return []
 
     @classmethod
@@ -68,7 +67,7 @@ class Base:
         """write CSV serialization of objects in a file"""
         filename = cls.__name__ + ".csv"
         with open(filename, "w", newline="") as csvfile:
-            if list_objs is None or list_objs == []:
+            if list_objs is None or not list_objs:
                 csvfile.write("[]")
             else:
                 if cls.__name__ == "Rectangle":
@@ -90,5 +89,5 @@ class Base:
                 list_dic = [dict([k, int(v)] for k, v in x.items())
                             for d in list_dic]
                 return [cls.create(**x) for x in list_dic]
-        except IOError:
+        except FileNotFoundError:
             return []
