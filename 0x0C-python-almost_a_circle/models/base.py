@@ -30,8 +30,8 @@ class Base:
             list_objs = []
         filename = cls.__name__ + ".json"
         objects = [obj.to_dictionary() for obj in list_objs]
-        json_str = cls.to_json_string(objects)
-        with open(filename, "w", encoding='uft-8') as file:
+        json_str = cls.to__json_string(objects)
+        with open(filename, "w", encoding='utf-8') as file:
             file.write(json_str)
 
     @staticmethod
@@ -56,8 +56,8 @@ class Base:
     def load_from_file(cls):
         """returns a list of classes instatiated from a file JSON"""
         try:
-            with open(filename, "r") as jsonfile:
-                list_dic = cls.from_json_string(jsonfile.read())
+            with open(cls.__name__ + ".json", "r") as jsonfile:
+                list_dic = cls.from__json_string(jsonfile.read())
                 return [cls.create(**i) for i in list_dic]
         except FileNotFoundError:
             return []
