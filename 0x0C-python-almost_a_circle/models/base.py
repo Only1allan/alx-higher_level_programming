@@ -17,7 +17,7 @@ class Base:
             self.id = Base.__nb_objects
 
     @staticmethod
-    def to__json_string(list_dictionaries):
+    def to_json_string(list_dictionaries):
         """returns JSON string representation"""
         if list_dictionaries is None or not list_dictionaries:
             return []
@@ -30,12 +30,12 @@ class Base:
             list_objs = []
         filename = cls.__name__ + ".json"
         objects = [obj.to_dictionary() for obj in list_objs]
-        json_str = cls.to__json_string(objects)
+        json_str = cls.to_json_string(objects)
         with open(filename, "w", encoding='utf-8') as file:
             file.write(json_str)
 
     @staticmethod
-    def from__json_string(json_string):
+    def from_json_string(json_string):
         """return the deserialization of a JSON string"""
         if json_string is None or not json_string:
             return []
@@ -57,7 +57,7 @@ class Base:
         """returns a list of classes instatiated from a file JSON"""
         try:
             with open(cls.__name__ + ".json", "r") as jsonfile:
-                list_dic = cls.from__json_string(jsonfile.read())
+                list_dic = cls.from_json_string(jsonfile.read())
                 return [cls.create(**i) for i in list_dic]
         except FileNotFoundError:
             return []
