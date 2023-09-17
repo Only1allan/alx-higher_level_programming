@@ -17,11 +17,12 @@ if __name__ == '__main__':
                 port=3306
             )
         cursor = database.cursor()
+        match = sys.argv[4]
         query = "SELECT * \
                         FROM states\
-                        WHERE name LIKE BINARY '{}' \
+                        WHERE name LIKE BINARY %s \
                         ORDER BY states.id"
-        cursor.execute(query.format(sys.argv[4]))
+        cursor.execute(query, (match, ))
         states = cursor.fetchall()
 
         for state in states:

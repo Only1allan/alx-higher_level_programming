@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-script takes argument and displays values in tates where name matches rgument.
+a script takes in the name of state and lists all cities of state
 """
 import MySQLdb
 import sys
@@ -9,6 +9,8 @@ if __name__ == '__main__':
     if len(sys.argv) != 5:
         print("Invalid argument number")
         sys.exit(1)
+    cursor = None
+
     try:
         database = MySQLdb.connect(
                 user=sys.argv[1],
@@ -17,15 +19,18 @@ if __name__ == '__main__':
                 port=3306
             )
         cursor = database.cursor()
-        query = "SELECT * \
-                        FROM states\
-                        WHERE name LIKE BINARY '{}' \
+        match = sys.argv[4]
+        query = "SELECT cities.name \
+                        FROM cities\
+                        INNER JOIN states ON (states.id = cities.state_id)\
+                        WHERE state.name=%s \
                         ORDER BY states.id"
-        cursor.execute(query.format(sys.argv[4]))
-        states = cursor.fetchall()
+        cursor.execute(query, (sys.argv[4], ))
+        cities = cursor.fetchall()
 
-        for state in states:
-            print(state)
+        city_names = [city[0]for city in cities]
+        city_total = ", ".join(city_names)
+        print(city_total)
     except MySQLdb.Error as error:
         print("Could not connect to server")
 
