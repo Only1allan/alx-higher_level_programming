@@ -21,9 +21,10 @@ if __name__ == "__main__":
     cur = db.cursor()
 
     state_name = sys.argv[4]
-    query = "SELECT * FROM states WHERE name = BINARY '{:s}' \
-        ORDER BY states.id ASC".format(
-        state_name)
+    query = "SELECT * \
+    FROM states \
+    WHERE CONVERT(`name` USING Latin1) \
+    COLLATE Latin1_General_CS = '{}';".format(sys.argv[4])
     cur.execute(query, (state_name,))
 
     results = cur.fetchall()
