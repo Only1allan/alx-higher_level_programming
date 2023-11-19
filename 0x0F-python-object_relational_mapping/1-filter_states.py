@@ -16,8 +16,10 @@ if __name__ == "__main__":
 
     cur = db.cursor()
 
-    query = "SELECT id, name FROM states \
-        WHERE name LIKE 'N%' ORDER BY states.id "
+    query = "SELECT * FROM states \
+        WHERE CONVERT(`name` USING Latin1) \
+        COLLATE Latin1_General_CS \
+     LIKE 'N%' ORDER BY states.id ASC"
     cur.execute(query)
 
     results = cur.fetchall()
