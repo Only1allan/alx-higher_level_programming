@@ -24,8 +24,8 @@ if __name__ == "__main__":
     query = "SELECT * \
     FROM states \
     WHERE CONVERT(`name` USING Latin1) \
-    COLLATE Latin1_General_CS = '{}';".format(sys.argv[4])
-    cur.execute(query, (state_name,))
+    COLLATE Latin1_General_CS = '{}'".format(state_name)
+    cur.execute(query)
 
     results = cur.fetchall()
 
