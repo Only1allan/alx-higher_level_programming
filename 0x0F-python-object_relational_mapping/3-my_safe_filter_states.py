@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+ takes an argument and displays states in table of hbtn_0e_0_usa injection free
+"""
 import sys
 import MySQLdb
 
