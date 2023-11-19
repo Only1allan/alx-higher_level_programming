@@ -2,22 +2,24 @@
 import MySQLdb
 import sys
 
-if "__name__" == "__main__":
-	db = MySQLdb.connect(
-		host=localhost,
-		port=3306,
-		user=sys.argv[1],
-		passwd=sys.argv[2]
-		db=sys.argv[3]
+if __name__ == "__main__":
+    db = MySQLdb.connect(
+        host='localhost',
+        port=3306,
+        user=sys.argv[1],
+        passwd=sys.argv[2],
 
-	cur = db.cursor()
+        db=sys.argv[3])
 
-	query = "SELECT name FROM states WHERE name LIKE 'N%' ORDER BY states.id "
-	cur.execute(query)
+    cur = db.cursor()
 
-	results = fetchall()
-	for row in results:
-		print(row)
+    query = "SELECT id, name FROM states \
+        WHERE name LIKE 'N%' ORDER BY states.id "
+    cur.execute(query)
 
-	cur.close()
-	db.close()
+    results = cur.fetchall()
+    for row in results:
+        print(row)
+
+    cur.close()
+    db.close()

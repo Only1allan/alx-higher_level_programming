@@ -3,24 +3,30 @@ import sys
 import MySQLdb
 
 if __name__ == "__main__":
-	db = MySQLdb.connect(
-		host="localhost",
-		port=3306,
-		user=sys.argv[1]
-		passwd=sys.argv[2]
-		db=sys.argv[3]
-		state_name=sys.argv[4]
-		)
 
-	cur = db.cursor()
+    if len(sys.argv) != 5:
+        print("Missing right no of arguments")
+        sys.exit(1)
 
-	query = "SELECT * FROM states WHERE name = {} ORDER BY states.id ASC".format(state_name)
-	cur.execute(query, (state_search,))
+    db = MySQLdb.connect(
+        host="localhost",
+        port=3306,
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3])
 
-	results = cur.fetchall()
+    cur = db.cursor()
 
-	for row in results:
-		print(row)
+    state_name = sys.argv[4]
+    query = "SELECT * FROM states WHERE name = BINARY '{:s}' \
+        ORDER BY states.id ASC".format(
+        state_name)
+    cur.execute(query, (state_name,))
 
-	cur.close()
-	db.close()
+    results = cur.fetchall()
+
+    for row in results:
+        print(row)
+
+    cur.close()
+    db.close()
