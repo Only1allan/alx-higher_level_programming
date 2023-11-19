@@ -16,12 +16,13 @@ if __name__ == "__main__":
     state_name = sys.argv[4]
 
     cur = db.cursor()
-    query = "SELECT * FROM cities WHERE name=%s ORDER BY cities.id"
+    query = "SELECT DISTINCT cities.name FROM cities \
+    JOIN states ON cities.state_id = states.id \
+    WHERE states.name=%s"
     cur.execute(query, (state_name,))
     results = cur.fetchall()
 
-    for row in results:
-        print(row)
+    print(", ".join([row[0] for row in results]))
 
     cur.close()
     db.close()
