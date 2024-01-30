@@ -1,1 +1,1 @@
-A directory on Javascript web scraping examples
+A directory introducing Webscraping in JS
